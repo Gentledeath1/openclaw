@@ -136,14 +136,10 @@ WORKDIR /app
 # On the full bookworm image these are already installed (apt-get is a no-op).
 # Smoke workflows can opt out of distro upgrades to cut repeated CI time while
 # keeping the default runtime image behavior unchanged.
-RUN RUN npm install=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
-    RUN npm install=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
-    apt-get update && \
-    if [ "${OPENCLAW_DOCKER_APT_UPGRADE}" != "0" ]; then \
-      DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends; \
-    fi && \
+RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-      procps hostname curl git lsof openssl
+    procps hostname curl git lsof openssl && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN chown node:node /app
 
