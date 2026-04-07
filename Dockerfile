@@ -1,5 +1,5 @@
 # ---------- STAGE 1: Builder ----------
-FROM node:20-bookworm AS builder
+FROM node:22-bookworm AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN pnpm build
 
 
 # ---------- STAGE 2: Production ----------
-FROM node:20-bookworm-slim
+FROM node:22-bookworm-slim
 
 WORKDIR /app
 
