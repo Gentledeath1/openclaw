@@ -3,18 +3,14 @@ FROM node:20-bookworm AS builder
 
 WORKDIR /app
 
-# install pnpm
 RUN npm install -g pnpm
 
-# copy dependency files first (better caching)
-COPY package.json pnpm-lock.yaml* ./
-
-RUN pnpm install --frozen-lockfile
-
-# copy project
+# copy entire project FIRST
 COPY . .
 
-# build project
+# now install deps (scripts folder exists)
+RUN pnpm install --frozen-lockfile
+
 RUN pnpm build
 
 
