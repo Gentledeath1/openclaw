@@ -27,7 +27,8 @@ COPY scripts ./scripts
 COPY extensions ./extensions
 
 # Stage 3: Install dependencies
-RUN npm install
+RUN pnpm install
+RUN chmod +x node_modules/.bin/*
 
 # Stage 4: Build/Bundle project
 # Adjust these according to your project needs
