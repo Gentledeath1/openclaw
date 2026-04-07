@@ -2,9 +2,11 @@
 .worktrees
 
 # Sensitive files – scripts/docker/setup.sh writes .env with OPENCLAW_GATEWAY_TOKEN
+
 # into the project root; keep it out of the build context.
+
 .env
-.env.*
+.env.\*
 
 .bun-cache
 .bun
@@ -12,15 +14,15 @@
 **/.tmp
 .DS_Store
 **/.DS_Store
-*.png
-*.jpg
-*.jpeg
-*.webp
-*.gif
-*.mp4
-*.mov
-*.wav
-*.mp3
+_.png
+_.jpg
+_.jpeg
+_.webp
+_.gif
+_.mp4
+_.mov
+_.wav
+_.mp3
 node_modules
 **/node_modules
 .pnpm-store
@@ -34,19 +36,33 @@ node_modules
 coverage
 **/coverage
 docs/.generated
-**/.generated
-*.log
+\*\*/.generated
+_.log
 tmp
-**/tmp
+\*\*/tmp
+
+node_modules
+.git
+.gitignore
+Dockerfile
+npm-debug.log
+pnpm-debug.log
+\*.log
+.cache
+dist
+data
+workspace
 
 # build artifacts
+
 dist
 **/dist
 apps/macos/.build
 apps/ios/build
-**/*.trace
+**/\*.trace
 
 # large app trees not needed for CLI build
+
 apps/
 assets/
 Peekaboo/
@@ -56,7 +72,9 @@ Users/
 vendor/
 
 # Needed for building the Canvas A2UI bundle during Docker image builds.
+
 # Keep the rest of apps/ and vendor/ excluded to avoid a large build context.
+
 !apps/shared/
 !apps/shared/OpenClawKit/
 !apps/shared/OpenClawKit/Sources/
