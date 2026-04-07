@@ -26,6 +26,8 @@ COPY patches ./patches
 COPY scripts ./scripts
 COPY extensions ./extensions
 
+RUN corepack enable
+
 # Stage 3: Install dependencies
 RUN pnpm install
 RUN chmod +x node_modules/.bin/*
